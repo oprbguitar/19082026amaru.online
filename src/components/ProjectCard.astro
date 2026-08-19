@@ -1,0 +1,37 @@
+---
+import type { Project } from '../data/projects';
+
+interface Props extends Project {}
+const project = Astro.props as Props;
+---
+<article class={`project-card color-${project.color}`} data-project-id={project.id} data-project-search={`${project.title} ${project.description} ${project.category} ${project.keywords.join(' ')}`} data-project-category={project.category} data-project-status={project.status} data-project-keywords={project.keywords.join('|')} data-project-url={project.url}>
+  <button class="card-hit-area" type="button" aria-label={`Abrir ${project.title}`}>
+    <span class="medallion" aria-hidden="true">
+      <svg viewBox="0 0 44 44" role="presentation">
+        <circle cx="22" cy="22" r="19" fill="none" stroke="currentColor" stroke-width="1.4" />
+        <circle cx="22" cy="22" r="12" fill="none" stroke="currentColor" stroke-width="1" stroke-dasharray="2 2" />
+        <path d="M22 12v20M12 22h20M15 15l14 14M29 15 15 29" fill="none" stroke="currentColor" stroke-width="1.2" />
+        <circle cx="22" cy="22" r="3" fill="currentColor" />
+      </svg>
+    </span>
+    <span class="card-number">{project.number}</span>
+    <span class="card-icon" aria-hidden="true">
+      {project.icon === 'archive' && <svg viewBox="0 0 48 48"><path d="M16 20h16v20H16zM12 20h24M19 14h10v6H19zM20 27h8M20 32h8" /></svg>}
+      {project.icon === 'brain' && <svg viewBox="0 0 48 48"><path d="M21 11a7 7 0 0 0-7 7 7 7 0 0 0 1 13 7 7 0 0 0 7 6V11ZM27 11a7 7 0 0 1 7 7 7 7 0 0 1-1 13 7 7 0 0 1-7 6V11ZM14 23h7m13 0h-7M21 17h6m-6 13h6" /></svg>}
+      {project.icon === 'target' && <svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="15" /><circle cx="24" cy="24" r="8" /><circle cx="24" cy="24" r="2.5" /><path d="m29 19 8-8M33 11h4v4" /></svg>}
+      {project.icon === 'mountain' && <svg viewBox="0 0 48 48"><path d="m8 37 13-22 6 9 4-6 9 19H8Z" /><path d="m18 22 3-7 3 5M24 28h4" /></svg>}
+      {project.icon === 'eye' && <svg viewBox="0 0 48 48"><path d="M7 24s6-11 17-11 17 11 17 11-6 11-17 11S7 24 7 24Z" /><circle cx="24" cy="24" r="5" /><path d="M24 6v6M24 36v6M6 24h6M36 24h6" /></svg>}
+      {project.icon === 'document' && <svg viewBox="0 0 48 48"><path d="M14 7h14l7 7v27H14zM28 7v8h7M19 23h11M19 29h11M19 35h7" /></svg>}
+      {project.icon === 'scales' && <svg viewBox="0 0 48 48"><path d="M24 8v31M16 40h16M11 13h26M13 13l-7 13h14l-7-13ZM35 13l-7 13h14l-7-13Z" /></svg>}
+      {project.icon === 'shield' && <svg viewBox="0 0 48 48"><path d="M24 6 38 11v10c0 10-6 17-14 21C16 38 10 31 10 21V11L24 6Z" /><path d="m17 24 5 5 10-11" /></svg>}
+      {project.icon === 'database' && <svg viewBox="0 0 48 48"><ellipse cx="24" cy="11" rx="14" ry="5" /><path d="M10 11v12c0 3 6 5 14 5s14-2 14-5V11M10 23v12c0 3 6 5 14 5s14-2 14-5V23" /></svg>}
+      {project.icon === 'flask' && <svg viewBox="0 0 48 48"><path d="M19 7h10M22 7v13L12 36a4 4 0 0 0 3 6h18a4 4 0 0 0 3-6L26 20V7M16 34h16" /></svg>}
+      {project.icon === 'telescope' && <svg viewBox="0 0 48 48"><path d="m11 18 19-8 5 10-19 8zM15 29l-5 13M25 26l7 16M20 31h13M33 15l6-4" /></svg>}
+      {project.icon === 'chart' && <svg viewBox="0 0 48 48"><path d="M9 8h30v32H9zM16 32v-8M24 32V17M32 32V13" /></svg>}
+    </span>
+    <span class="card-title">{project.title}</span>
+    <span class="card-description">{project.description}</span>
+    <span class="card-pattern" aria-hidden="true">⌁⌁⌁⌁⌁</span>
+    <span class="card-arrow" aria-hidden="true">↗</span>
+  </button>
+</article>

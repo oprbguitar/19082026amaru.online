@@ -1,0 +1,25 @@
+---
+import { projects } from '../data/projects';
+import ProjectCard from './ProjectCard.astro';
+const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+---
+<section id="biblioteca" class="library-panel" aria-labelledby="library-title">
+  <div class="library-heading">
+    <div>
+      <p class="section-kicker">Colección viva</p>
+      <h2 id="library-title">Proyectos que conectan conocimiento</h2>
+    </div>
+    <span class="library-count">{projects.length} proyectos</span>
+  </div>
+  <div class="bookshelf-frame" style={`--frame-image: url('${base}assets/box.png')`}>
+    <div class="shelf-grid" aria-live="polite">
+      {projects.map((project) => <ProjectCard {...project} />)}
+      <p class="search-empty" hidden>No encontramos proyectos con esa búsqueda.</p>
+    </div>
+  </div>
+  <div class="mobile-library-controls" aria-label="Controles de proyectos">
+    <button class="library-arrow" type="button" data-library-prev aria-label="Proyecto anterior">←</button>
+    <span class="library-page" aria-live="polite"><b data-library-current>01</b> / {projects.length.toString().padStart(2, '0')}</span>
+    <button class="library-arrow" type="button" data-library-next aria-label="Proyecto siguiente">→</button>
+  </div>
+</section>

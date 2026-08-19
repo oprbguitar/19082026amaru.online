@@ -1,0 +1,17 @@
+:root {
+  --amaru-green: #008b78;
+  --amaru-green-dark: #006c61;
+  --amaru-cyan: #16a99d;
+  --amaru-orange: #ef711f;
+  --amaru-gold: #e3a713;
+  --amaru-purple: #7352b5;
+  --amaru-blue: #2d74d5;
+  --amaru-paper: #faf8f3;
+  --amaru-ink: #182334;
+  --amaru-muted: #617080;
+  --amaru-border: rgba(24, 35, 52, 0.12);
+  --amaru-shadow: 0 12px 28px rgba(67, 57, 38, 0.14);
+  --radius-card: 14px;
+  --radius-pill: 999px;
+  --motion: 220ms cubic-bezier(.2,.8,.2,1);
+}
