@@ -3,14 +3,7 @@ import { projects } from '../data/projects';
 import ProjectCard from './ProjectCard.astro';
 const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
 ---
-<section id="biblioteca" class="library-panel" aria-labelledby="library-title">
-  <div class="library-heading">
-    <div>
-      <p class="section-kicker">Colección viva</p>
-      <h2 id="library-title">Proyectos que conectan conocimiento</h2>
-    </div>
-    <span class="library-count">{projects.length} proyectos</span>
-  </div>
+<section id="biblioteca" class="library-panel" aria-label="Biblioteca de proyectos">
   <div class="bookshelf-frame" style={`--frame-image: url('${base}assets/box.png')`}>
     <div class="shelf-grid" aria-live="polite">
       {projects.map((project) => <ProjectCard {...project} />)}
