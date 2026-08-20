@@ -3,7 +3,6 @@ import MainLayout from '../layouts/MainLayout.astro';
 import Header from '../components/Header.astro';
 import Hero from '../components/Hero.astro';
 import Bookshelf from '../components/Bookshelf.astro';
-import StatsBar from '../components/StatsBar.astro';
 import ProjectModal from '../components/ProjectModal.astro';
 const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
 ---
@@ -14,7 +13,6 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
       <Hero />
       <Bookshelf />
     </main>
-    <StatsBar />
     <section id="sobre-amaru" class="sr-only" aria-label="Sobre Amaru">Amaru conecta fuentes, proyectos y conocimiento confiable.</section>
     <section id="comunidad" class="sr-only" aria-label="Comunidad">Comunidad Amaru.</section>
     <section id="contacto" class="sr-only" aria-label="Contacto">Contacto Amaru.</section>
@@ -26,12 +24,7 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
   type ProjectData = { id: string; number: string; title: string; description: string; category: string; status: string; keywords: string[]; url?: string };
 
   const cards = Array.from(document.querySelectorAll<HTMLElement>('[data-project-id]'));
-  const search = document.querySelector<HTMLInputElement>('#project-search');
-  const emptyState = document.querySelector<HTMLElement>('.search-empty');
   const dialog = document.querySelector<HTMLDialogElement>('#project-dialog');
-  const menu = document.querySelector<HTMLElement>('#mobile-menu');
-  const menuToggle = document.querySelector<HTMLButtonElement>('.menu-toggle');
-  const menuClose = document.querySelector<HTMLButtonElement>('.mobile-menu-close');
   const closeDialog = document.querySelector<HTMLButtonElement>('[data-dialog-close]');
   const currentPage = document.querySelector<HTMLElement>('[data-library-current]');
   const previousButton = document.querySelector<HTMLButtonElement>('[data-library-prev]');
@@ -63,35 +56,6 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
     if (currentPage) currentPage.textContent = visibleCards[mobileIndex].querySelector('.card-number')?.textContent?.trim() ?? '01';
   };
 
-  const filterCards = (query: string) => {
-    const normalizedQuery = query.trim().toLocaleLowerCase('es');
-    let matches = 0;
-    cards.forEach((card) => {
-      const haystack = (card.dataset.projectSearch ?? '').toLocaleLowerCase('es');
-      const matchesQuery = !normalizedQuery || haystack.includes(normalizedQuery);
-      card.hidden = !matchesQuery;
-      if (matchesQuery) matches += 1;
-    });
-    if (emptyState) emptyState.hidden = matches > 0;
-    mobileIndex = 0;
-    updateMobileCard();
-  };
-
-  const closeMobileMenu = () => {
-    if (!menu || !menuToggle) return;
-    menu.hidden = true;
-    menuToggle.setAttribute('aria-expanded', 'false');
-    document.body.classList.remove('menu-open');
-  };
-
-  const openMobileMenu = () => {
-    if (!menu || !menuToggle) return;
-    menu.hidden = false;
-    menuToggle.setAttribute('aria-expanded', 'true');
-    document.body.classList.add('menu-open');
-    menu.querySelector<HTMLAnchorElement>('a')?.focus();
-  };
-
   const openProject = (card: HTMLElement) => {
     const project = dataFromCard(card);
     if (project.url) {
@@ -114,17 +78,10 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
     closeDialog?.focus();
   };
 
-  search?.addEventListener('input', () => filterCards(search.value));
   cards.forEach((card) => card.querySelector<HTMLButtonElement>('.card-hit-area')?.addEventListener('click', () => openProject(card)));
-  menuToggle?.addEventListener('click', openMobileMenu);
-  menuClose?.addEventListener('click', closeMobileMenu);
-  menu?.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeMobileMenu));
   closeDialog?.addEventListener('click', () => dialog?.close());
   dialog?.addEventListener('close', () => lastFocusedElement?.focus());
   previousButton?.addEventListener('click', () => { mobileIndex -= 1; updateMobileCard(); });
   nextButton?.addEventListener('click', () => { mobileIndex += 1; updateMobileCard(); });
-  document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape') closeMobileMenu();
-  });
   updateMobileCard();
 </script>

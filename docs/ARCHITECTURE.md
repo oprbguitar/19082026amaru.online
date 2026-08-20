@@ -2,21 +2,20 @@
 
 ## Aplicación
 
-Amaru.online es un sitio Astro estático. `MainLayout.astro` concentra metadata, canonical, favicon y manifest. `index.astro` compone el header, hero, librería, barra informativa y modal; no hay servidor, API, autenticación ni almacenamiento remoto.
+Amaru.online es un sitio Astro estático. `MainLayout.astro` concentra metadata, canonical, favicon y manifest. `index.astro` compone la marca, el hero, la librería y el modal; no hay servidor, API, autenticación ni almacenamiento remoto.
 
 ## Componentes
 
-- `Header.astro`: marca, navegación desktop, búsqueda y menú móvil.
+- `Header.astro`: marca del sitio.
 - `Hero.astro`: jerarquía editorial, principios y CTAs.
 - `Bookshelf.astro`: marco de piedra, grid y controles móviles.
 - `ProjectCard.astro`: tarjeta reutilizable y accesible para cada proyecto.
 - `ProjectModal.astro`: detalle semántico para proyectos sin URL.
-- `StatsBar.astro`: métricas derivadas del catálogo local.
 - `QuipuDecoration.astro`: capa decorativa con el activo local.
 
 ## Datos e interacción
 
-`src/data/projects.ts` es la única fuente del catálogo. El script pequeño de `index.astro` filtra el atributo de búsqueda, mantiene el estado de página del carrusel móvil, abre el `<dialog>` nativo y restaura el foco. La búsqueda cubre título, descripción, categoría y palabras clave.
+`src/data/projects.ts` es la única fuente del catálogo. El script pequeño de `index.astro` mantiene el estado de página del carrusel móvil, abre el `<dialog>` nativo y restaura el foco.
 
 ## Responsive
 
